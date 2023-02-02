@@ -16,18 +16,18 @@ import {
 import { WrapperEmptyTasks, WrapperTasks } from "../styled/Wrappers";
 import TaskModal from "./TaskModal";
 
-const TaskList = () => {
+const TaskList: React.FC = () => {
   const { tasks, filteredTasks, filterAll, filterSearch } = useAppSelector(
     (state) => state.taskReducer
   );
   const dispatch = useAppDispatch();
 
-  const onOpenModal = (id: number) => {
+  const onOpenModal = (id: number): void => {
     dispatch(setIdRemoveTask(id));
     dispatch(showModal());
   };
 
-  const onChangeResult = (id: number) => {
+  const onChangeResult = (id: number): void => {
     dispatch(changeResult(id));
   };
 

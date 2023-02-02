@@ -12,7 +12,7 @@ import { FilterCheckbox } from "../styled/Forms";
 import { TaskCheckbox } from "../styled/Task";
 import { WrapperCheckboxes, WrapperSearch } from "../styled/Wrappers";
 
-const TaskSearch = () => {
+const TaskSearch: React.FC = () => {
   const { filterAll, filterDone, filterSearch } = useAppSelector(
     (state) => state.taskReducer
   );
@@ -20,15 +20,15 @@ const TaskSearch = () => {
 
   const onSearchTasks = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {  
+  ): void => {
     dispatch(searchTask(e.target.value));
   };
 
-  const onChangeAll = () => {
+  const onChangeAll = (): void => {
     dispatch(changeFilterAll());
   };
 
-  const onChangeDone = () => {
+  const onChangeDone = (): void => {
     dispatch(changeFilterDone());
   };
 

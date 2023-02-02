@@ -10,17 +10,17 @@ import {
   showModal,
 } from "../store/reducers/TaskSlice";
 
-const TaskModal = () => {
+const TaskModal: React.FC = () => {
   const { modal, idRemoveTask } = useAppSelector((state) => state.taskReducer);
 
   const dispatch = useAppDispatch();
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     dispatch(showModal());
     dispatch(setIdRemoveTask(0));
   };
 
-  const onRemoveTask = () => {
+  const onRemoveTask = (): void => {
     dispatch(removeTask(idRemoveTask));
     dispatch(showModal());
     dispatch(setIdRemoveTask(0));

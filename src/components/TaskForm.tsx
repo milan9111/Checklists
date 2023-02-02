@@ -11,7 +11,7 @@ interface ITaskForm {
   text: string;
 }
 
-const TaskForm = () => {
+const TaskForm: React.FC = () => {
   const [submittedData] = useState<ITaskForm>({ text: "" });
   const {
     handleSubmit,
@@ -23,7 +23,7 @@ const TaskForm = () => {
 
   const dispatch = useAppDispatch();
 
-  const onSubmit = ({ text }: ITaskForm) => {
+  const onSubmit = ({ text }: ITaskForm):void => {
     dispatch(addTask(text));
   };
 

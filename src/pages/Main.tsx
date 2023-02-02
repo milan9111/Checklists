@@ -4,7 +4,7 @@ import TaskList from "../components/TaskList";
 import TaskSearch from "../components/TaskSearch";
 import { Title } from "../styled/Title";
 
-const Main = () => {
+const Main: React.FC = () => {
   return (
     <>
       <Title component="h1">Checklists</Title>

@@ -3,7 +3,7 @@ import { useAppSelector } from "./hooks/redux";
 import MainLayout from "./layouts/MainLayout";
 import Main from "./pages/Main";
 
-const App = () => {
+const App: React.FC = () => {
   const { tasks } = useAppSelector((state) => state.taskReducer);
 
   useEffect(() => {
