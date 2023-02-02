@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import InputAdornment from '@mui/material/InputAdornment';
-import KeyboardIcon from '@mui/icons-material/Keyboard';
+import InputAdornment from "@mui/material/InputAdornment";
+import KeyboardIcon from "@mui/icons-material/Keyboard";
 import { Field, Submit } from "../styled/Forms";
 import { WrapperForm } from "../styled/Wrappers";
+import { useAppDispatch } from "../hooks/redux";
+import { addTask } from "../store/reducers/TaskSlice";
 
 interface ITaskForm {
   text: string;
 }
 
 const TaskForm = () => {
-  const [submittedData,] = useState<ITaskForm>({ text: "" });
+  const [submittedData] = useState<ITaskForm>({ text: "" });
   const {
     handleSubmit,
     formState,
@@ -18,15 +20,18 @@ const TaskForm = () => {
     reset,
     control,
   } = useForm<ITaskForm>();
-  const onSubmit = (data: ITaskForm) => {
-    console.log(data);
+
+  const dispatch = useAppDispatch();
+
+  const onSubmit = ({ text }: ITaskForm) => {
+    dispatch(addTask(text));
   };
 
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset({ ...submittedData });
     }
-  }, [formState, submittedData, reset]);
+  }, [formState, submittedData, reset, isSubmitSuccessful]);
 
   return (
     <WrapperForm component="form" onSubmit={handleSubmit(onSubmit)}>

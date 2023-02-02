@@ -37,10 +37,18 @@ export const WrapperTasks = styled(Box)`
   flex-direction: column;
 `;
 
+export const WrapperEmptyTasks = styled(Box)`
+  text-align: center;
+  margin: 50px 0px 0px 0px;
+  font-size: 22px;
+  color: #d32f2f;
+`;
+
 export const WrapperModal = styled(Box)`
   position: absolute;
   top: 50%;
   left: 50%;
+  z-index: 100;
   transform: translate(-50%, -50%);
   width: 50%;
   padding: 20px 40px;

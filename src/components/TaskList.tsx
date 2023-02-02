@@ -1,5 +1,11 @@
 import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useAppSelector, useAppDispatch } from "../hooks/redux";
+import {
+  changeResult,
+  setIdRemoveTask,
+  showModal,
+} from "../store/reducers/TaskSlice";
 import {
   Task,
   TaskButton,
@@ -7,75 +13,67 @@ import {
   TaskCheckbox,
   TaskText,
 } from "../styled/Task";
-import { WrapperTasks } from "../styled/Wrappers";
+import { WrapperEmptyTasks, WrapperTasks } from "../styled/Wrappers";
 import TaskModal from "./TaskModal";
 
-const arr = [
-  {
-    id: 0,
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ",
-    done: true,
-  },
-  {
-    id: 1,
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    done: false,
-  },
-  {
-    id: 2,
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    done: false,
-  },
-];
-
 const TaskList = () => {
-  const onRemoveTask = (id: number) => {
-    console.log(id);
+  const { tasks, filteredTasks, filterAll, filterSearch } = useAppSelector(
+    (state) => state.taskReducer
+  );
+  const dispatch = useAppDispatch();
+
+  const onOpenModal = (id: number) => {
+    dispatch(setIdRemoveTask(id));
+    dispatch(showModal());
   };
 
   const onChangeResult = (id: number) => {
-    console.log(id);
+    dispatch(changeResult(id));
   };
 
-  const tasks = arr
-    .sort((a, b) => +a.done - +b.done)
-    .map((item, index) => {
-      return (
-        <Task
-          component="li"
-          key={item.id}
+  const showTasks = !filterSearch && filterAll ? tasks : filteredTasks;
+
+  const elemTasks = showTasks.map((item, index) => {
+    return (
+      <Task
+        component="li"
+        key={item.id}
+        sx={
+          item.done ? { backgroundColor: "#00ff1d29" } : { backgroundColor: "" }
+        }
+      >
+        <TaskNumber component="p">{index + 1}.</TaskNumber>
+        <TaskText
+          component="p"
           sx={
             item.done
-              ? { backgroundColor: "#00ff1d29" }
-              : { backgroundColor: "" }
+              ? { textDecoration: "line-through" }
+              : { textDecoration: "none" }
           }
         >
-          <TaskNumber component="p">{index + 1}.</TaskNumber>
-          <TaskText
-            component="p"
-            sx={
-              item.done
-                ? { textDecoration: "line-through" }
-                : { textDecoration: "none" }
-            }
-          >
-            {item.text}
-          </TaskText>
-          <TaskCheckbox
-            onChange={() => onChangeResult(item.id)}
-            checked={item.done}
-            color="success"
-          />
-          <TaskButton onClick={() => onRemoveTask(item.id)}>
-            <DeleteIcon />
-          </TaskButton>
-        </Task>
-      );
-    });
+          {item.text}
+        </TaskText>
+        <TaskCheckbox
+          onChange={() => onChangeResult(item.id)}
+          checked={item.done}
+          color="success"
+        />
+        <TaskButton onClick={() => onOpenModal(item.id)}>
+          <DeleteIcon />
+        </TaskButton>
+      </Task>
+    );
+  });
+
+  if (!showTasks.length) {
+    return (
+      <WrapperEmptyTasks component="p">There are not tasks!</WrapperEmptyTasks>
+    );
+  }
 
   return (
     <>
-      <WrapperTasks component="ul">{tasks}</WrapperTasks>
+      <WrapperTasks component="ul">{elemTasks}</WrapperTasks>
       <TaskModal />
     </>
   );

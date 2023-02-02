@@ -11,8 +11,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <>
       <CssBaseline />
-      <Container maxWidth="xl">
-        <WrapperApp component="div">{children}</WrapperApp>
+      <Container maxWidth="xl" component="main">
+        <WrapperApp component="section">{children}</WrapperApp>
       </Container>
     </>
   );
