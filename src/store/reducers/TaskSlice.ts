@@ -47,9 +47,11 @@ export const taskSlice = createSlice({
     },
     removeTask(state, action: PayloadAction<number>) {
       state.tasks = state.tasks.filter((item) => item.id !== action.payload);
-      state.filteredTasks = state.tasks.filter(
-        (item) => item.id !== action.payload
-      );
+      state.filteredTasks = state.filterDone
+        ? state.tasks
+            .filter((item) => item.id !== action.payload)
+            .filter((item) => item.done === true)
+        : state.tasks.filter((item) => item.id !== action.payload);
       state.filterSearch = "";
     },
     changeResult(state, action: PayloadAction<number>) {
@@ -72,9 +74,7 @@ export const taskSlice = createSlice({
     searchTask(state, action: PayloadAction<string>) {
       state.filterSearch = action.payload;
       let filteredTasks = state.tasks.filter((item) =>
-        item["text"].toLowerCase().includes(state.filterSearch.toLowerCase())
-          ? item
-          : false
+        item.text.toLowerCase().includes(state.filterSearch.toLowerCase())
       );
       filteredTasks = state.filterDone
         ? filteredTasks.filter((item) => item.done === true)

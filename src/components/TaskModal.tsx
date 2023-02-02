@@ -2,13 +2,13 @@ import React from "react";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useAppSelector, useAppDispatch } from "../hooks/redux";
-import { ModalButton, ModalButtons } from "../styled/Modal";
-import { WrapperModal } from "../styled/Wrappers";
 import {
   removeTask,
   setIdRemoveTask,
   showModal,
 } from "../store/reducers/TaskSlice";
+import { ModalButton, ModalButtons } from "../styled/Modal";
+import { WrapperModal } from "../styled/Wrappers";
 
 const TaskModal: React.FC = () => {
   const { modal, idRemoveTask } = useAppSelector((state) => state.taskReducer);

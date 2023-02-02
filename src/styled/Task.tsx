@@ -43,4 +43,5 @@ export const TaskText = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-wrap: anywhere;
 `;

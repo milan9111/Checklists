@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import InputAdornment from "@mui/material/InputAdornment";
 import KeyboardIcon from "@mui/icons-material/Keyboard";
+import { addTask } from "../store/reducers/TaskSlice";
+import { useAppDispatch } from "../hooks/redux";
 import { Field, Submit } from "../styled/Forms";
 import { WrapperForm } from "../styled/Wrappers";
-import { useAppDispatch } from "../hooks/redux";
-import { addTask } from "../store/reducers/TaskSlice";
 
 interface ITaskForm {
   text: string;
@@ -23,7 +23,7 @@ const TaskForm: React.FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const onSubmit = ({ text }: ITaskForm):void => {
+  const onSubmit = ({ text }: ITaskForm): void => {
     dispatch(addTask(text));
   };
 
@@ -40,7 +40,7 @@ const TaskForm: React.FC = () => {
           <Field
             error={Boolean(errors.text)}
             id="your-task"
-            label={errors.text ? "Min length 2 letters" : "Your task"}
+            label={errors.text ? "At least 2 characters" : "Your task"}
             variant="outlined"
             placeholder="Write your checklist text here"
             InputProps={{

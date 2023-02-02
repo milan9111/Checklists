@@ -1,5 +1,27 @@
+import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
+
+export const ContainerApp = styled(Container)`
+  @media (min-width: 1536px) {
+    max-width: 100%;
+  }
+  height: 100vh;
+  overflow-y: auto;
+  position: relative;
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #1976d2;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #1976d2;
+  }
+  scrollbar-color: #1976d2 #fff;
+  scrollbar-width: thin;
+`;
 
 export const WrapperApp = styled(Box)`
   width: 100%;
