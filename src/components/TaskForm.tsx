@@ -55,7 +55,7 @@ const TaskForm: React.FC = () => {
         )}
         name="text"
         control={control}
-        rules={{ required: true, minLength: 2 }}
+        rules={{ required: true, minLength: 2, pattern: /[^\s]/ }}
         defaultValue=""
       />
       <Submit type="submit">Send</Submit>
