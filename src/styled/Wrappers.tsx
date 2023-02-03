@@ -41,7 +41,7 @@ export const WrapperForm = styled(Box)`
 export const WrapperSearch = styled(Box)`
   margin: 0px 0px;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   @media (max-width: 768px) {
     flex-direction: column;

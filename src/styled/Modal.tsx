@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 
 export const ModalButtons = styled(Box)`
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   margin: 20px 0px 0px 0px;
 `;
 
